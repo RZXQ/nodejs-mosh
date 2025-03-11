@@ -8,8 +8,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "prettier": "3.5.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RZXQ/nodejs-mosh.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RZXQ/nodejs-mosh/issues"
+  },
+  "homepage": "https://github.com/RZXQ/nodejs-mosh#readme",
+  "description": ""
 }
