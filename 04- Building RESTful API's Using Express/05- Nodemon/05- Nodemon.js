@@ -1,3 +1,5 @@
+// Install nodemon globally using npm
 // npm install -g nodemon
 
-// then instead of running the applicaiton using node index.js, we use nodemon index.js
+// Run your application using nodemon instead of node
+// nodemon index.js
