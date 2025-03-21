@@ -49,3 +49,16 @@ const port = process.env.PORT || 3000;
 
 // Start server and display message indicating the port it listens on
 app.listen(port, () => console.log(`Listening on port: ${port}`));
+
+// | Feature     | `Content-Type`              | `Accept`                     |
+// |-------------|-----------------------------|------------------------------|
+// | Direction   | Client → Server (request)   | Server → Client (response)   |
+//
+//  WebStorm HTTP Requests:
+//      POST http://localhost:3000/api/courses
+//      Accept: application/json
+//      Content-Type: application/json
+//
+//      {
+//          "name":"reacher"
+//      }
