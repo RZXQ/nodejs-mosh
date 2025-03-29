@@ -65,7 +65,7 @@ app.get("/", (req, res) => {
 // - Sets port configuration explicitly defined in `.env`, or defaults gracefully to port `3000`.
 // - Note: Consider renaming `route` to `port` for clarity, as this variable represents the
 //   server’s listening port, not a route path.
-const route = process.env.PORT || 3000;
-app.listen(route, () => {
-  console.log(`Listening on port: ${route}`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
 });
