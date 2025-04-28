@@ -12,11 +12,7 @@ const eventEmitter = new EventEmitter(); // Create a new instance of EventEmitte
 // The `.on()` method registers (sets up) a listener callback.
 // When EventEmitter emits the event named "messageLogged":
 // the provided callback function will execute.
-eventEmitter.on("messageLogged", (eventData) => {
-  // The argument "eventData" is passed from the `.emit()` method.
-  // In other words, `.emit()` sends data to the listener, which the listener receives as "eventData".
-  console.log(eventData);
-});
+eventEmitter.on("messageLogged", (args) => console.log(args));
 
 // ===========================================================
 //                        Emit an Event
@@ -24,4 +20,4 @@ eventEmitter.on("messageLogged", (eventData) => {
 
 // The `.emit()` method triggers an event. It can optionally send data.
 // Here, it's sending an object { id, url } to the listener.
-eventEmitter.emit("messageLogged", { id: 1, url: "https://" });
+eventEmitter.emit("messageLogged", { id: 1, url: "https://" }, "b", "c", "d");
