@@ -1,27 +1,12 @@
-// ===========================================================
-//                      Event Basics with EventEmitter
-// ===========================================================
-
-// Event: Signals something happened, like a request hitting a port
-// In Node.js, http.Server (not just 'HTTP class') raises events for requests
-// Our job: Catch the event, read the request, send a response
-const EventEmitter = require("events"); // EventEmitter is a class for event handling
-
+// Import and initialize EventEmitter
+const EventEmitter = require("events");
 const eventEmitter = new EventEmitter();
 
-// ===========================================================
-//                      Registering a Listener
-// ===========================================================
-
-// Listener: Function that runs when an event fires
-// .on() (alias for addListener) takes event name and callback
-// Order is key: Listen first, emit later
+// 1. Register event listener (must happen before emitting)
+// The .on() method connects a function to a named event
 eventEmitter.on("messageLogged", function () {
   console.log("Listener called");
 });
 
-// ===========================================================
-//                      Raising an Event
-// ===========================================================
-
-eventEmitter.emit("messageLogged"); // Triggers the event, runs the listener
+// 2. Emit the event to trigger listener
+eventEmitter.emit("messageLogged");
