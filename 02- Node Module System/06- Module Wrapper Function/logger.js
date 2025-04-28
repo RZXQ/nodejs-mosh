@@ -2,16 +2,19 @@
 //                      Node.js Module Wrapper
 // ===========================================================
 
-// Before execution, Node.js automatically wraps your module inside:
+// Node.js wraps each module inside an immediately invoked function:
 // (function(exports, require, module, __filename, __dirname) {
 //   // Your module code here
-// });
+// })();
 
-// Benefits of the Module Wrapper:
-// 1. Separates top-level variables from global scope.
-// 2. Provides module-specific variables:
-//    - `module` and `exports` for exporting module values
-//    - `__filename` and `__dirname` for absolute paths
+// This wrapper function runs automatically when the module is loaded, during the require process.
+// As soon as the module is required, the function executes once, establishing the module scope.
+
+// Benefits of this module wrapper:
+// 1. Encapsulates variables to prevent polluting the global scope.
+// 2. Provides access to module-specific variables:
+//    - `module` and `exports` for exporting values.
+//    - `__filename` and `__dirname` for absolute path information.
 
 console.log(__filename);
 console.log(__dirname);
@@ -27,20 +30,16 @@ function log(message) {
   console.log(message);
 }
 
-// ===========================================================
-//                Examples of module exporting:
-// ===========================================================
+// Example of exporting the module:
 
-// 1. Exporting the entire function/object directly as a module:
-module.exports = log;
+// 1. Export the entire function/object directly:
+// module.exports = log;
 
-// 2. Exporting the function/object as a property of the exports object:
-module.exports.log = log;
+// 2. Export as a property of `module.exports` or `exports`:
+// module.exports.log = log;
+// exports.log = log;
 
-// 3. Alternatively, directly assigning a named property to `exports` object:
-exports.log = log;
-
-// 4. Important note:
-// The keyword `exports` is a reference to `module.exports`.
-// Reassigning the `exports` reference directly will NOT EXPORT the module:
-// ❌ Not allowed: exports = logMessage;
+// 3. Note:
+//    - `exports` is a reference to `module.exports`.
+//    - Reassigning `exports` itself (e.g., `exports = ...`) does NOT change the exported module.
+//    - Always modify properties of `exports`, not reassign `exports`.
