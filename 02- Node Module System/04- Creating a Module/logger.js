@@ -27,4 +27,4 @@ module.exports.loggerUrl = loggerUrl; // usually internal; exposed here for demo
 //                        Module Inspection
 // ===========================================================
 
-// console.log(module); // inspect current module state
+console.log(module); // inspect current module state
