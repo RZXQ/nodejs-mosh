@@ -1,19 +1,21 @@
 // ===========================================================
-//                   Required Module Usage
+//                  Required Module Usage
 // ===========================================================
 
 // -----------------------------------------------------------
-// 1. Exporting an Object
+// 1. Importing an Entire Module as an Object
 // -----------------------------------------------------------
 
 const logger = require("./logger");
+logger.log("message"); // Using the log method from the logger module
 
-logger.log("message");
+// Alternatively, destructure specific exports for convenience
+const { log } = require("./logger");
+log("message"); // Using the destructured log function
 
 // -----------------------------------------------------------
-// 2. Exporting Single Function
+// 2. Exporting a Single Function from a Module
 // -----------------------------------------------------------
 
 const log = require("./logger");
-
-log("message");
+log("message"); // Directly using the exported function

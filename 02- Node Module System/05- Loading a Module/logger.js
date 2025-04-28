@@ -8,8 +8,8 @@ function log(message) {
   console.log(message);
 }
 
-// Export an object with log method passing exports an object { log: [Function: log] }
+// 1. Export an object with log method passing exports an object { log: [Function: log] }
 module.exports.log = log;
 
-// Export a single function directly, exports function itself [Function: log]
+// 2. Export a single function directly, exports function itself [Function: log]
 module.exports = log;
