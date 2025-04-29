@@ -1,19 +1,29 @@
 // ===========================================================
-//                        Module Importing (require)
+//                Module Resolution Algorithm
 // ===========================================================
+// When you call require('something'), Node.js resolves in this order:
+//
+// 1. CORE MODULES
+//    Built-in modules like 'fs', 'path', 'http'
+//    Example: require('fs')
+//
+// 2. LOCAL MODULES
+//    Files or directories with relative/absolute paths
+//    Example: require('./utils') or require('../config')
+//
+// 3. NODE_MODULES
+//    Third-party packages in node_modules directory
+//    Searches in current directory, then parent directories
+//    Example: require('underscore')
 
-// How 'require' resolves modules in Node.js:
-// 1. Core Module (e.g., fs, path)
-// 2. File or Folder (./ or ../ with relative paths)
-// 3. node_modules folder (installed via npm)
-const underscore = require("underscore");
+const _ = require("underscore"); // Loads from node_modules
 
 // ===========================================================
-//                     Underscore Package Usage
+//                Underscore Package Usage
 // ===========================================================
+// Example: Check if a value exists in an array
+const numbers = [1, 2, 3, 4, 5];
+const valueToFind = 3;
 
-// 'contains' checks if a value exists in the array
-const numbers = [1, 2, 3];
-const value = 3;
-
-console.log(underscore.contains(numbers, value)); // true
+const exists = _.contains(numbers, valueToFind);
+console.log(exists); // true
