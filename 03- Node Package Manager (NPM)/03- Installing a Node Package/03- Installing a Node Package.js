@@ -1,12 +1,10 @@
 // ===========================================================
-//                      Install Node Package
+//                      Dependencies
 // ===========================================================
-// npm i underscore    <- Installs 'underscore' package locally
+// Regular Dependencies (Production)
+// npm i underscore --save          - Old way to add to dependencies (now default)
+// npm i underscore                 - New way (--save is implicit)
 
-// Added: Adds package to node_modules and package.json dependencies.
-
-// ===========================================================
-//                      Older npm Version Behavior
-// ===========================================================
-// npm i underscore --save    <- Old way: explicitly saved to package.json
-// npm i underscore           <- Now: auto-saves to package.json by default
+// Development Dependencies (Testing/Building)
+// npm i underscore --save-dev      - Add as dev dependency
+// npm i underscore -D              - Short syntax for dev dependency
