@@ -1,6 +1,8 @@
-// To uninstall the mongoose package, run:
-// npm uninstall mongoose
-
-// This command will:
-// 1. Remove mongoose from the node_modules folder
-// 2. Remove mongoose from the dependencies listed in package.json
+// Uninstall a package:
+// $ npm uninstall <package>
+// or shorthand: $ npm un <package>
+// Example: npm uninstall mongoose
+//
+// This will:
+// 1. Remove the package from node_modules
+// 2. Delete its entry from package.json ("dependencies" or "devDependencies")
