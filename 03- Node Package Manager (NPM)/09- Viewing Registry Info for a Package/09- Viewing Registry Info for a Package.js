@@ -1,22 +1,24 @@
-// ===========================================
-//                  npm view
-// ===========================================
+// 1. View specific package version(s):
+//
+//    // List all available versions:
+//    $ npm view mongoose versions
+//
+//    // Show latest version:
+//    $ npm view mongoose version
+//
+//    // Show information about a specific version:
+//    $ npm view mongoose@6.0.0
+//
+//    // Check the latest available version that satisfies a range:
+//    $ npm view mongoose@">=4.0.0 <5.0.0" version
 
-// Displays detailed information about a package available on npm
-
-// Usage examples:
-
-// 1. General details about a package:
-// npm view <package-name>
-// Example:
-// npm view mongoose
-
-// 2. Display dependencies of a specific package:
-// npm view <package-name> dependencies
-// Example:
-// npm view mongoose dependencies
-
-// 3. List all available versions of a specific package:
-// npm view <package-name> versions
-// Example:
-// npm view mongoose versions
+// 2. View package dependencies:
+//
+//    // List all dependencies:
+//    $ npm view mongoose dependencies
+//
+//    // List dev dependencies:
+//    $ npm view mongoose devDependencies
+//
+//    // List peer dependencies:
+//    $ npm view mongoose peerDependencies
