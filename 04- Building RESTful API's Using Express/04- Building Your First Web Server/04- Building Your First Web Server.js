@@ -1,18 +1,17 @@
 const express = require("express");
 const app = express();
 
-// Root route handler
+// Handle requests to the root route
 app.get("/", (req, res) => {
-  console.log("Detected request on root route (/)");
-  res.send("Hello World!");
+  res.send("Hello World!"); // send() = write() + end()
 });
 
-// API route handler for "/api/courses"
+// Handle requests to "/api/courses"
 app.get("/api/courses", (req, res) => {
   res.send([1, 2, 3]);
 });
 
-// Listening on port 3000
+// Start the server and listen on port 3000
 app.listen(3000, () => {
-  console.log("Listening on port 3000...");
+  console.log("Server is listening on port 3000...");
 });
