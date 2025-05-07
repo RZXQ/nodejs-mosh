@@ -1,15 +1,16 @@
-// Express Server Setup
+// Import and initialize Express
 const express = require("express");
 const app = express();
 
-// Routes
+// Load environment variables from .env file (requires: npm install dotenv)
+require("dotenv").config();
+
+// Define application routes
 app.get("/", (req, res) => res.send("Hello World"));
 app.get("/api/courses", (req, res) => res.send([1, 2, 3]));
 
-// Port Configuration
-const port = process.env.port || 3000; // Fallback to 3000 if env var not set
+// Set the port from environment variable or default to 3000
+const port = process.env.PORT || 3000;
 
-// Server Start
+// Start the server and log the port
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// Note: On Mac, set port with `export port=5001`
