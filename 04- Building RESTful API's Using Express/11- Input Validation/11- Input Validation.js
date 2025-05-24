@@ -1,7 +1,7 @@
 // JSON schema validation
 const express = require("express");
 // Import Zod for input validation - correct import is { z }
-const { z } = require("zod");
+const { z } = require("zod/v4");
 
 const app = express();
 
