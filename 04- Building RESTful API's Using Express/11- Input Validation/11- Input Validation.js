@@ -36,6 +36,48 @@ app.post("/api/courses", (req, res) => {
     res.send(course);
   } catch (error) {
     // Handle validation errors
+    // // Example of a ZodError object structure
+    // {
+    //   issues: [
+    //     {
+    //       code: 'invalid_type',
+    //       expected: 'string',
+    //       received: 'undefined',
+    //       path: ['name'],
+    //       message: 'Required'
+    //     },
+    //     {
+    //       code: 'too_small',
+    //       minimum: 3,
+    //       type: 'string',
+    //       inclusive: true,
+    //       exact: false,
+    //       message: 'String must contain at least 3 character(s)',
+    //       path: ['description']
+    //     }
+    //     // More issues if there are multiple validation failures
+    //   ],
+    //   name: 'ZodError',
+    //   errors: [
+    //     {
+    //       code: 'invalid_type',
+    //       expected: 'string',
+    //       received: 'undefined',
+    //       path: ['name'],
+    //       message: 'Required'
+    //     },
+    //     {
+    //       code: 'too_small',
+    //       minimum: 3,
+    //       type: 'string',
+    //       inclusive: true,
+    //       exact: false,
+    //       message: 'String must contain at least 3 character(s)',
+    //       path: ['description']
+    //     }
+    //     // Same contents as the issues array
+    //   ]
+    // }
     if (error instanceof z.ZodError) {
       console.log(error);
       res.status(400).send(error.errors[0].message);
