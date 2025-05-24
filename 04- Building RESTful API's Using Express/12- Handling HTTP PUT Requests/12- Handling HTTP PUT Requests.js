@@ -1,54 +1,43 @@
 const express = require("express");
-const Joi = require("joi");
-
+const { z } = require("zod/v4");
 const app = express();
-
 app.use(express.json());
 
-let courses = [
+const courses = [
   { id: 1, name: "course1" },
   { id: 2, name: "course2" },
   { id: 3, name: "course3" },
 ];
 
-// Function to validate input using Joi schema constraints
-function validateCourse(course) {
-  const schema = Joi.object({
-    name: Joi.string().required().min(3).max(10),
-  });
+app.get("/api/courses", (req, res) => res.send(courses));
 
-  return schema.validate(course);
-}
+const schema = z.object({
+  name: z.string().min(2),
+});
 
-// PUT request handler to update an existing course by ID
 app.put("/api/courses/:id", (req, res) => {
-  // Find course by ID provided in URL parameters
-  const course = courses.find((c) => c.id === parseInt(req.params.id));
-
-  // If the course doesn't exist, return 404 (resource not found)
-  if (!course) {
-    res.status(404).send("The course with the given ID was not found.");
-  } else {
-    // Validate request body; returns error details if validation fails
-    const { error } = validateCourse(req.body);
-
-    // If validation error exists, respond with 400 (bad request)
-    if (error) {
-      res.status(400).send(error.details[0].message);
+  try {
+    // 1. Check if course exists in the database
+    const course = courses.find((c) => c.id === parseInt(req.params.id));
+    if (!course) {
+      res.status(404).send("Course not found");
       return;
     }
 
-    // Update course name and respond to client
-    course.name = req.body.name;
-    res.send(`successfully updated ID: ${course.id} with ${course.name}`);
+    // 2. Update the course name with validated data
+    const validatedData = schema.parse(req.body);
+    course.name = validatedData.name;
+
+    // 3. Return the updated course to the client
+    res.send(course);
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      res.status(400).send(err.errors[0].message); // a. Return 400 Bad Request for validation errors
+    } else {
+      res.status(500).send("Internal Server Error"); // b. Return 500 for unexpected errors
+    }
   }
 });
 
-// GET request handler to return all courses
-app.get("/api/courses/all", (req, res) => {
-  res.send(courses);
-});
-
-// Set port from environment or default to 3000, and listen for requests
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on ${port}`));
