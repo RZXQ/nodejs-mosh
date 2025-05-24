@@ -1,7 +1,7 @@
 // JSON schema validation
 const express = require("express");
-// Import Joi for input validation
-const Joi = require("joi");
+// Import Zod for input validation - correct import is { z }
+const { z } = require("zod");
 
 const app = express();
 
@@ -17,28 +17,32 @@ const courses = [
 app.get("/api/courses", (req, res) => res.send(courses));
 
 app.post("/api/courses", (req, res) => {
-  // Define validation schema with Joi
-  // - name: must be a string, at least 3 characters, and is required
-  const schema = Joi.object({
-    name: Joi.string().min(3).required(),
+  // Define validation schema with Zod
+  const schema = z.object({
+    // With Zod, .required() is unnecessary as fields are required by default
+    name: z.string().min(3),
   });
 
-  // Validate request body against schema
-  // Destructure to get only the error from validation result
-  const { error } = schema.validate(req.body);
+  try {
+    // Zod's parse method throws an error if validation fails
+    // It doesn't return an object with an error property
+    const validData = schema.parse(req.body);
 
-  // If validation fails, return 400 Bad Request with error message
-  if (error) {
-    res.status(400).send(error.message);
-    return;
+    const course = {
+      id: courses.length + 1,
+      name: validData.name,
+    };
+    courses.push(course);
+    res.send(course);
+  } catch (error) {
+    // Handle validation errors
+    if (error instanceof z.ZodError) {
+      console.log(error);
+      res.status(400).send(error.errors[0].message);
+    } else {
+      res.status(500).send("An unexpected error occurred");
+    }
   }
-
-  const course = {
-    id: courses.length + 1,
-    name: req.body.name,
-  };
-  courses.push(course);
-  res.send(course);
 });
 
 const port = process.env.PORT || 3000;
